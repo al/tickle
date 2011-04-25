@@ -1,6 +1,7 @@
 require File.expand_path(File.dirname(__FILE__) + '/helper')
 require 'time'
 require 'test/unit'
+require 'timecop'
 
 class TestParsing < Test::Unit::TestCase
 
@@ -8,6 +9,8 @@ class TestParsing < Test::Unit::TestCase
     Tickle.debug = (ARGV.detect {|a| a == '--d'})
     @verbose = (ARGV.detect {|a| a == '--v'})
 
+    Timecop.travel(Time.local(2011, 4, 2, 0, 0, 0))
+    
     puts "Time.now"
     p Time.now
 
