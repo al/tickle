@@ -47,7 +47,7 @@ class Tickle::Repeater < Chronic::Tag #:nodoc:
     scanner.keys.each do |scanner_item|
       if scanner_item =~ token.original
         token.word = scanner[scanner_item]
-        token.update(:ordinal, scanner[scanner_item].ordinal_as_number, Tickle.days_in_month(Tickle.get_next_month(scanner[scanner_item].ordinal_as_number)))
+        token.update(:ordinal, scanner[scanner_item].ordinal_as_number, Tickle.send(:days_in_month, Tickle.send(:get_next_month, scanner[scanner_item].ordinal_as_number)))
       end
     end
     token
@@ -57,7 +57,7 @@ class Tickle::Repeater < Chronic::Tag #:nodoc:
     regex = /\b(\d*)(st|nd|rd|th)\b/
     if token.original =~ regex
       token.word = token.original
-      token.update(:ordinal, token.word.ordinal_as_number, Tickle.days_in_month(Tickle.get_next_month(token.word)))
+      token.update(:ordinal, token.word.ordinal_as_number, Tickle.send(:days_in_month, Tickle.send(:get_next_month, token.word)))
     end
     token
   end
